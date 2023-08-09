@@ -140,9 +140,9 @@ void do_send(osjob_t* j) {
           Serial2.write('\r');
           Serial3.write('\r');
           Serial4.write('\r');
-//          delay(1000);
+          delay(1000);
         #else
-//          delay(100);
+          delay(100);
         #endif
         int i = 0;
         while (Serial2.available()) {
@@ -161,7 +161,7 @@ void do_send(osjob_t* j) {
         }
         int16_t ozoneConcentration = Ozone.readOzoneData(COLLECT_NUMBER);
         delay(100);
-
+//        Serial.println(ozoneConcentration);
         String str_co_data = "";
         String str_no2_data = "";
         String str_so2_data = "";
@@ -170,6 +170,7 @@ void do_send(osjob_t* j) {
             str_no2_data += NO2_data[loopIdx];
             str_so2_data += SO2_data[loopIdx];
         }
+//        Serial.println(str_so2_data);
         String dustData, coPPB, no2PPB, so2PPB, allData;
         //Serial.println(str_co_data);
         dustData = String(dust);
@@ -177,7 +178,7 @@ void do_send(osjob_t* j) {
         no2PPB = value_convert(str_no2_data);
         so2PPB = value_convert(str_so2_data);
         String ozone = String(ozoneConcentration);
-
+//        Serial.println(ozone);
         snprintf(mydata, sizeof(mydata), "%s,%s,%s,%s,%s", dustData.c_str(), coPPB.c_str(), no2PPB.c_str(), so2PPB.c_str(),ozone.c_str());
         LMIC_setTxData2(1, (uint8_t*)mydata, strlen(mydata), 0);
 //        Serial.println(F("Packet queued"));
@@ -203,6 +204,10 @@ void setup() {
     //pms
     pinPeripheral(1, PIO_SERCOM_ALT);
     pinPeripheral(0, PIO_SERCOM_ALT);
+      while(!Ozone.begin(Ozone_IICAddress)) {
+    Serial.println("I2c device number error !");
+    delay(1000);
+  }
     pms.passiveMode();
     Ozone.setModes(MEASURE_MODE_PASSIVE);
     os_init();
