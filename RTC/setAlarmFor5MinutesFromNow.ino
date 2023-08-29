@@ -153,7 +153,7 @@ void printDigits(int digits) {
 void alarmMatch()
 {
   do_send();
-  setAlarmFor5MinutesFromNow(); // Reset the alarm for another 5 minutes
+//  setAlarmFor5MinutesFromNow(); // Reset the alarm for another 5 minutes
 }
 
 void setAlarmFor5MinutesFromNow()
@@ -209,6 +209,7 @@ void user_request_network_time_callback(void *pVoidUserUTCTime, int flagSuccess)
 
 void do_send() {
     char mydata[100];
+    setAlarmFor5MinutesFromNow();
     // Check if there is not a current TX/RX job running
     if (LMIC.opmode & OP_TXRXPEND) {
         Serial.println(F("OP_TXRXPEND, not sending"));
