@@ -22,23 +22,23 @@ def combine_data(data_values):
     return ','.join(data_values[:5] + value_6_to_9)
 # 모비우스에 데이터 전송 함수 (REST API 사용)
 def publish_to_mobius_rest_api(combined_values):
-    mobius_url = "http://114.71.220.59:7579/Mobius/gpm/Data"
+    mobius_url = 'http://114.71.220.59:7579/Mobius/gpm/Data'
     headers = {
         'Accept': 'application/json',
         'X-M2M-RI': '12345',
-        'X-M2M-Origin': 'SYRSxt5-D5q',
+        'X-M2M-Origin': 'S-xwJrLz1ot',
         'Content-Type': 'application/vnd.onem2m-res+json; ty=4'
     }
-    data = str(combined_values)
+    data = "{}".format(combined_values)
+    # print(type(data))
     payload_data = {
         "m2m:cin": {
             "con": data
         }
-        # Add any additional fields you want to send to the server
     }
     response = requests.post(mobius_url, headers=headers, json=payload_data)
     # response = requests.post(mobius_url, json=payload, headers=headers)
-    if response.status_code == 201:  # 성공적으로 전송되었을 때의 상태 코드에 맞게 수정
+    if response.status_code == 201:
         print("Data sent to Mobius successfully!")
     else:
         print("Failed to send data to Mobius.")
