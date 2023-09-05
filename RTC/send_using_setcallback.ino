@@ -214,12 +214,6 @@ void do_send(osjob_t* j) {
     if (LMIC.opmode & OP_TXRXPEND) {
         Serial.println(F("OP_TXRXPEND, not sending"));
     } else {
-          if (!timeRequested) {
-            LMIC_requestNetworkTime(user_request_network_time_callback, &userUTCTime);
-            timeRequested = true;
-        }
-        pms.wakeUp();
-        delay(30000);
         send_year = rtc.getYear();
         send_month = rtc.getMonth();
         send_day = rtc.getDay();
@@ -233,7 +227,6 @@ void do_send(osjob_t* j) {
             pm25 = data.PM_AE_UG_2_5;
             pm10 = data.PM_AE_UG_10_0;
         }
-        pms.sleep();
         #if PollingMode
           Serial2.write('\r');
           Serial3.write('\r');
@@ -314,6 +307,7 @@ void setup() {
     Ozone.setModes(MEASURE_MODE_PASSIVE);
     os_init();
     LMIC_reset();
+    LMIC_requestNetworkTime(user_request_network_time_callback, &userUTCTime);
     do_send(&sendjob);
 }
 void loop() {
