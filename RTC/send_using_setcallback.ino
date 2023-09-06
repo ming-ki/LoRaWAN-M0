@@ -268,17 +268,20 @@ void do_send(osjob_t* j) {
         no2PPB = value_convert(str_no2_data);
         so2PPB = value_convert(str_so2_data);
         String ozone = String(ozoneConcentration);
-//        Serial.print("dust : ");
-//        Serial.println(dust);
-//        Serial.print("co : ");
-//        Serial.println(coPPB);
-//        Serial.print("no2 : ");
-//        Serial.println(no2PPB);
-//        Serial.print("so2 : ");
-//        Serial.println(so2PPB);
-//        Serial.println(ozone);
+        Serial.print("dust : ");
+        Serial.print(dust1);
+        Serial.print(dust25);
+        Serial.println(dust10);
+        Serial.print("co : ");
+        Serial.println(coPPB);
+        Serial.print("no2 : ");
+        Serial.println(no2PPB);
+        Serial.print("so2 : ");
+        Serial.println(so2PPB);
+        Serial.println(ozone);
         snprintf(mydata, sizeof(mydata), "1,%s,%s,%s,%s,%s,%s,%s,%s", time_str,dust1.c_str(), dust25.c_str(),dust10.c_str(),coPPB.c_str(), no2PPB.c_str(), so2PPB.c_str(),ozone.c_str());
         LMIC_setTxData2(1, (uint8_t*)mydata, strlen(mydata), 0);
+        Serial.println(LMIC.freq);
     }
 }
 void setup() {
