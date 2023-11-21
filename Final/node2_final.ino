@@ -63,6 +63,7 @@ void os_getDevEui (u1_t* buf) { memcpy_P(buf, DEVEUI, 8); }
 // This key should be in big endian format
 static const u1_t PROGMEM APPKEY[16] = { 0x92, 0x92, 0x4E, 0x98, 0xB0, 0x7B, 0xC6, 0x45, 0x7F, 0x71, 0x97, 0xBE, 0x76, 0xC6, 0x0B, 0x6F };
 void os_getDevKey (u1_t* buf) {  memcpy_P(buf, APPKEY, 16); }
+static osjob_t sendjob;
 // Pin mapping
 const lmic_pinmap lmic_pins = {
     .nss = 8,
