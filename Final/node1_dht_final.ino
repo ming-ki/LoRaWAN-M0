@@ -267,19 +267,19 @@ void do_send(osjob_t* j) {
         {
         case DHTLIB_OK:
             counter.ok++;
-            Serial.print("OK,\t");
+            //Serial.print("OK,\t");
             break;
         case DHTLIB_ERROR_CHECKSUM:
             counter.crc_error++;
-            Serial.print("Checksum error,\t");
+            //Serial.print("Checksum error,\t");
             break;
         case DHTLIB_ERROR_TIMEOUT:
             counter.time_out++;
-            Serial.print("Time out error,\t");
+            //Serial.print("Time out error,\t");
             break;
         default:
             counter.unknown++;
-            Serial.print("Unknown error,\t");
+            //Serial.print("Unknown error,\t");
             break;
         }
         float h = DHT.getHumidity();
