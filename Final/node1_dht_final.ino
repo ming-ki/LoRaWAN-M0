@@ -284,7 +284,7 @@ void do_send(osjob_t* j) {
         }
         float h = DHT.getHumidity();
         float t = DHT.getTemperature();
-        delay(2000);
+        //delay(2000);
         String str_co_data = "";
         String str_no2_data = "";
         String str_so2_data = "";
