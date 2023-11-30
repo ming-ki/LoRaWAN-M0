@@ -305,7 +305,7 @@ void do_send(osjob_t* j) {
         String temperature = String(t);
         String batteryVoltage = readBatteryVoltage();
     // 데이터 문자열에 배터리 전압 추가
-        snprintf(mydata, sizeof(mydata), "1,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", time_str, dust1.c_str(), dust25.c_str(), dust10.c_str(), coPPB.c_str(), no2PPB.c_str(), so2PPB.c_str(), ozone.c_str(), humidity.c_str(),temperature.c_str(),batteryVoltage.c_str());
+        snprintf(mydata, sizeof(mydata), "3,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", time_str, dust1.c_str(), dust25.c_str(), dust10.c_str(), coPPB.c_str(), no2PPB.c_str(), so2PPB.c_str(), ozone.c_str(), humidity.c_str(),temperature.c_str(),batteryVoltage.c_str());
         LMIC_setTxData2(1, (uint8_t*)mydata, strlen(mydata), 0);
         Serial.println(LMIC.freq);
     }
